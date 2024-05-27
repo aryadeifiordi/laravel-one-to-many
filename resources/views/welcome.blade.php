@@ -5,7 +5,7 @@
             <div class="logo_laravel">
 
                 <h1 class="display-5 fw-bold">
-                    Welcome to Laravel+Bootstrap 5
+                    Welcome to Laravel+Bootstrap 5 ciao
                 </h1>
 
                 <p class="col-md-8 fs-4">This a preset package with Bootstrap 5 views for laravel projects including laravel
