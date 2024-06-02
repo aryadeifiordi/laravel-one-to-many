@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use Faker\Generator;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 use App\Models\Type;
 
@@ -14,9 +13,11 @@ class TypeSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Generator $faker)
+    public function run()
     {
-        $_types = [
+        $faker = Factory::create();
+
+        $types = [
             'Sviluppo Web',
             'Applicazione Mobile',
             'Design Grafico',
@@ -24,11 +25,11 @@ class TypeSeeder extends Seeder
             'Educazione ed Istruzione',
         ];
 
-        foreach ($_types as $_type) {
-            $type = new Type();
-            $type->label = $_type;
-            $type->color = $faker->hexColor();
-            $type->save();
+        foreach ($types as $type) {
+            Type::create([
+                'label' => $type,
+                'color' => $faker->hexColor(),
+            ]);
         }
     }
 }

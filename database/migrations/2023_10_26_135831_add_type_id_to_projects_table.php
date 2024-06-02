@@ -8,23 +8,29 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('projects', function (Blueprint $table) {
-            
-            $table->foreignId('type_id')->constrained()->onDelete('cascade');
+            $table->foreignId('type_id')
+                ->after('id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::table('projects', function (Blueprint $table) {
-            
-            $table->dropForeign(['type_id']);
+            $table->dropForeign('projects_type_id_foreign');
             $table->dropColumn('type_id');
         });
     }
