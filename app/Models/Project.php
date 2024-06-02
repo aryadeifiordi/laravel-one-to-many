@@ -5,33 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'description',
-    ];
-
-    public static function rules()
+    public function type()
     {
-        return [
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ];
+        return $this->belongsTo(Type::class);
+    }
+    public function getTypeBadge()
+    {
+        return $this->type ? "<span class='badge' style='background-color: {$this->type->color}'>{$this->type->label}</span>" : "Undefined";
     }
 
-    public static function updateRules($id)
+    public function getAbstract($chars = 50)
     {
-        return [
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ];
-    }
-
-    public function projects()
-    {
-        return $this->hasMany(Project::class);
+        return strlen($this->content) > $chars ? substr($this->content, 0, $chars) . "..." : $this->content;
     }
 }
